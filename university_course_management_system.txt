@@ -1,0 +1,65 @@
+1. Perform CRUD Operations on all tables.
+Ans: INSERT INTO Students VALUES (9,'Henry','Moore','henry.moore@univ.com','2000-06-12','2023-03-15');
+UPDATE Students SET Email='john.updated@univ.com' WHERE StudentID=1;
+DELETE FROM Students WHERE StudentID=9;
+SELECT * FROM Students;
+
+2. Retrieve students who enrolled after 2022.
+Ans: SELECT * FROM Students WHERE YEAR(EnrollmentDate) > 2022;
+
+3. Retrieve courses offered by the Mathematics department with a limit of 5.
+Ans: SELECT * FROM Courses WHERE DepartmentID = 2 LIMIT 5;
+
+4. Get the number of students enrolled in each course (filtering for courses with more than 5 students).
+Ans: SELECT CourseID, COUNT(*) AS StudentCount FROM Enrollments GROUP BY CourseID HAVING COUNT(*) > 5;
+
+5. Find students who are enrolled in both Introduction to SQL and Data Structures.
+Ans: SELECT s.StudentID,s.FirstName,s.LastName
+FROM Students s
+WHERE s.StudentID IN (SELECT StudentID FROM Enrollments WHERE CourseID=101)
+AND s.StudentID IN (SELECT StudentID FROM Enrollments WHERE CourseID=102);
+
+6. Find students who are either enrolled in Introduction to SQL or Data Structures.
+Ans: SELECT s.StudentID,s.FirstName,s.LastName
+FROM Students s
+WHERE s.StudentID IN (SELECT StudentID FROM Enrollments WHERE CourseID=101)
+OR s.StudentID IN (SELECT StudentID FROM Enrollments WHERE CourseID=102);
+
+7. Calculate the average number of credits for all courses.
+Ans: SELECT AVG(Credits) FROM Courses;
+
+8. Find the maximum salary of instructors in the Computer Science department.
+Ans: SELECT MAX(Salary) FROM Instructors WHERE DepartmentID = 1;
+
+9. Count the number of students enrolled in each department.
+Ans: SELECT d.DepartmentName, COUNT(s.StudentID) 
+FROM Departments d 
+LEFT JOIN Students s ON d.DepartmentID=s.DepartmentID 
+GROUP BY d.DepartmentName;
+
+10. INNER JOIN: Retrieve students and their corresponding courses.
+Ans: SELECT s.FirstName, s.LastName, c.CourseName
+FROM Students s
+JOIN Enrollments e ON s.StudentID = e.StudentID
+JOIN Courses c ON e.CourseID = c.CourseID;
+
+11. LEFT JOIN: Retrieve all students and their corresponding courses (if any).
+Ans: SELECT s.FirstName, s.LastName, c.CourseName
+FROM Students s
+LEFT JOIN Enrollments e ON s.StudentID = e.StudentID
+LEFT JOIN Courses c ON e.CourseID = c.CourseID;
+
+12. Subquery: Find students enrolled in courses that have more than 10 students.
+Ans: SELECT * FROM Students
+WHERE StudentID IN (
+    SELECT StudentID FROM Enrollments
+    WHERE CourseID IN (
+        SELECT CourseID FROM Enrollments GROUP BY CourseID HAVING COUNT(*)>10
+    )
+);
+
+13. Extract the year from the EnrollmentDate of students.
+Ans: SELECT StudentID, YEAR(EnrollmentDate) FROM Students;
+
+14. Concatenate the instructor's first and last name.
+Ans: SELECT CONCAT(FirstName,' ',LastName) FROM Instructors;
