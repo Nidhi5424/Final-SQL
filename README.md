@@ -37,3 +37,8 @@ This project aims to simulate a University Course Management System and helps st
 4. Run each query and verify the output.
 
 All 14 required queries are included at the bottom of the SQL file (in beginner-friendly format).
+
+![f3](https://github.com/user-attachments/assets/287aee61-421d-4195-b985-35c4f10ad8bf)
+![f2](https://github.com/user-attachments/assets/8521b1ea-ceae-4db3-a2ba-e5232d0ede89)
+![f1](https://github.com/user-attachments/assets/33d61feb-0ad3-40a0-8a3b-e0f18d5f9925)
+
